@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginStart="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvPayment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/payment"
+            android:textColor="@color/gray_500"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvdescriptionPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19.2dp"
+            android:textColor="@color/gray_800"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tvPayment"
+            app:layout_constraintTop_toBottomOf="@id/tvPayment"
+            android:layout_marginBottom="15dp"
+            tools:text="Conta de luz" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/gray_500"
+            app:layout_constraintBottom_toBottomOf="@id/tvPayment"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="12/12/2021" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvdescriptionPayment"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20sp"
+            android:layout_marginTop="13.8dp"
+            tools:text="R$1000,00"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</com.google.android.material.circularreveal.cardview.CircularRevealCardView>
