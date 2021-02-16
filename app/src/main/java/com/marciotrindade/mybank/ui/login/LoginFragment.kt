@@ -1,17 +1,16 @@
 package com.marciotrindade.mybank.ui.login
 
-import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavController
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.marciotrindade.mybank.R
 import com.marciotrindade.mybank.databinding.FragmentLoginBinding
+import com.marciotrindade.mybank.utils.Validation
 import com.marciotrindade.mybank.utils.setColorStatusBar
 
 
@@ -21,7 +20,7 @@ class LoginFragment : Fragment() {
 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
       activity?.setColorStatusBar()
         binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
@@ -41,6 +40,30 @@ class LoginFragment : Fragment() {
 
 
         }
+        binding.btnLogin.setOnClickListener {
+            if( inputValidation()){
+               Toast.makeText(requireContext(),"ok",Toast.LENGTH_LONG).show()
+            }else{
+                Toast.makeText(requireContext(),"não",Toast.LENGTH_LONG).show()
+            }
+        }
+
+    }
+
+    private fun inputValidation():Boolean {
+        val edtUser = binding.edtUser
+        val tilUser = binding.tilUser
+        val edtPassword = binding.edtPassword
+        val tilPassword = binding.tilPassword
+
+Validation(requireContext()).apply {
+    return cpfReturn(edtUser,tilUser) || isEmailValid(edtUser,tilUser) &&
+            isEditTextFilled(edtUser,tilUser)
+            && passwordReturn(edtPassword,tilPassword)
+            && isEditTextFilled(edtPassword,tilPassword)
+
+}
+
     }
 
     override fun onResume() {

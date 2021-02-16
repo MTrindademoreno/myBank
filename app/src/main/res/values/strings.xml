@@ -11,4 +11,9 @@
     <string name="payment">Pagamento</string>
     <string name="conta">Conta</string>
     <string name="saldo">Saldo</string>
+    <string name="field_required">preenchimento obrigatório</string>
+    <string name="msg_invalid_email">Usuário inválido Cpf/Email</string>
+    <string name="email">e-mail</string>
+    <string name="password_invalid">senha deve conter  8 caracteres, uma letra maiuscula, um caracter especial e um caracter alfanumérico</string>
+    <string name="cpf_invalid">Usuário Invalido Cpf/Email</string>
 </resources>
