@@ -56,7 +56,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/balance"
+            android:id="@+id/tvBalance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"

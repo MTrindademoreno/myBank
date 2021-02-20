@@ -3,9 +3,12 @@ package com.marciotrindade.mybank.ui.account
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.marciotrindade.mybank.api.model.Statement
 import com.marciotrindade.mybank.databinding.ItemBalanceBinding
+import com.marciotrindade.mybank.utils.formatDataForBrazilian
+import com.marciotrindade.mybank.utils.formatForCoinBrazilian
 
-class AccountAdapter(private val list: List<Payments>) :
+class AccountAdapter(private val list: List<Statement>) :
     RecyclerView.Adapter<AccountAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,10 +27,10 @@ class AccountAdapter(private val list: List<Payments>) :
 
     class ViewHolder(private val binding: ItemBalanceBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(payments: Payments) = with(binding) {
-            tvDate.text = payments.date
-            tvdescriptionPayment.text = payments.title
-            tvAmount.text = payments.value
+        fun bind(statement: Statement) = with(binding) {
+            tvDate.text = statement.date.formatDataForBrazilian()
+            tvdescriptionPayment.text = statement.title
+            tvAmount.text =statement.value.formatForCoinBrazilian()
 
 
         }
