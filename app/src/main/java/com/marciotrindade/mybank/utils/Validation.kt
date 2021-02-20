@@ -109,7 +109,7 @@ class Validation(val context: Context) {
 
     companion object {
 
-        private val PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[!@#\$%&*])(?=.*[a-z0-9]).{6,}\$".toRegex()
+        private val PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[!@#\$%&*])(?=.*[a-z0-9]).{3,}\$".toRegex()
 
     }
 

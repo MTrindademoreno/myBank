@@ -14,6 +14,6 @@
     <string name="field_required">preenchimento obrigatório</string>
     <string name="msg_invalid_email">Usuário inválido Cpf/Email</string>
     <string name="email">e-mail</string>
-    <string name="password_invalid">senha deve conter  8 caracteres, uma letra maiuscula, um caracter especial e um caracter alfanumérico</string>
+    <string name="password_invalid">senha deve conter  3 caracteres, uma letra maiuscula, um caracter especial e um caracter alfanumérico</string>
     <string name="cpf_invalid">Usuário Invalido Cpf/Email</string>
 </resources>
