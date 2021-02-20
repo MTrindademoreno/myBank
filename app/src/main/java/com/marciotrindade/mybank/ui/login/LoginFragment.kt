@@ -1,5 +1,6 @@
 package com.marciotrindade.mybank.ui.login
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +12,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.marciotrindade.mybank.R
+import com.marciotrindade.mybank.api.model.UserAccountX
 import com.marciotrindade.mybank.databinding.FragmentLoginBinding
 import com.marciotrindade.mybank.ui.account.User
 import com.marciotrindade.mybank.utils.Validation
 import com.marciotrindade.mybank.utils.setColorStatusBar
 import com.marciotrindade.mybank.viewmodel.BalanceViewModel
+import com.orhanobut.hawk.Hawk
 
 
 class LoginFragment : Fragment() {
+    //todo persistencia do user com criptografia e testes
     private lateinit var balanceViewModel: BalanceViewModel
     private lateinit var binding: FragmentLoginBinding
     override fun onCreateView(
@@ -31,32 +35,51 @@ class LoginFragment : Fragment() {
         return binding.root
 
 
+
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        balanceViewModel = ViewModelProvider(requireActivity()).get(BalanceViewModel::class.java)
+        Hawk.init(requireActivity()).build()
 
-        balanceViewModel= ViewModelProvider(requireActivity()).get(BalanceViewModel::class.java)
 
-        balanceViewModel.userReturnLiveData.observe(viewLifecycleOwner, Observer {
-            startAccount()
+        if(Hawk.contains("currentUser")){
+            val teste = Hawk.get<UserAccountX>("currentUser")
+            loadAccount(teste.userId)
+            login()
+        }
 
+        balanceViewModel.userReturnLiveData.observe(viewLifecycleOwner, {userLog->
+          Hawk.put("currentUser",userLog)
+            loadAccount(userLog.userId)
         })
-
-
 
         binding.btnLogin.setOnClickListener {
             if (inputValidation()) {
-                val user = User(binding.edtUser.editableText.toString(),binding.edtPassword.editableText.toString())
-                balanceViewModel.postUser(user.id,user.Password)
+            login()
 
-
-                Toast.makeText(requireContext(), "ok", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(requireContext(), "não", Toast.LENGTH_LONG).show()
+
                 return@setOnClickListener
             }
         }
+
+    }
+
+    private fun login() {
+        val user = User(
+            binding.edtUser.editableText.toString(),
+            binding.edtPassword.editableText.toString()
+        )
+        balanceViewModel.postUser(user.id, user.Password)
+    }
+
+    private fun loadAccount(id:Int) {
+        balanceViewModel.loadBalance(id)
+        startAccount()
 
     }
 
@@ -74,7 +97,6 @@ class LoginFragment : Fragment() {
 
 
     }
-
 
 
     private fun inputValidation(): Boolean {

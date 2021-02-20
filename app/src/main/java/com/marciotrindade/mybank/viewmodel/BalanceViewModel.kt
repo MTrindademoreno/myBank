@@ -8,6 +8,7 @@ import com.marciotrindade.mybank.api.model.Statement
 import com.marciotrindade.mybank.api.model.UserAccountX
 import com.marciotrindade.mybank.api.service.ResponseApi
 import com.marciotrindade.mybank.business.BalanceBusiness
+import com.marciotrindade.mybank.ui.account.User
 import kotlinx.coroutines.launch
 
 class BalanceViewModel:ViewModel() {
@@ -20,12 +21,14 @@ class BalanceViewModel:ViewModel() {
 
 
 
+
     fun postUser(user: String, password: String) {
 
         viewModelScope.launch {
            when(val response =business.post(user,password)){
                is ResponseApi.Success->{
                    userReturnLiveData.postValue(response.data as UserAccountX)
+
                }
                is ResponseApi.Error->{
                    error.postValue(response.message)

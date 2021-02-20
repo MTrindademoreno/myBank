@@ -13,6 +13,7 @@ import com.marciotrindade.mybank.databinding.FragmentAccountBinding
 import com.marciotrindade.mybank.utils.changeColorStatusBar
 import com.marciotrindade.mybank.utils.formatForCoinBrazilian
 import com.marciotrindade.mybank.viewmodel.BalanceViewModel
+import com.orhanobut.hawk.Hawk
 
 
 class AccountFragment : Fragment() {
@@ -40,21 +41,20 @@ class AccountFragment : Fragment() {
 
         setubObservables()
         setupRecyclerview()
+        binding.btnLogout.setOnClickListener {
+            Hawk.deleteAll()
+            activity?.finish()
+        }
     }
 
 
     @SuppressLint("SetTextI18n")
     private fun setubObservables() {
 
-
         balanceViewModel.userReturnLiveData.observe(viewLifecycleOwner, Observer { user ->
             binding.tvUserName.text = user.name
             binding.account.text = " ${user.bankAccount}/${user.agency}"
             binding.tvBalance.text = user.balance.formatForCoinBrazilian()
-            val id = user.userId
-            balanceViewModel.loadBalance(id)
-
-
         })
 
 
